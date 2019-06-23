@@ -1,5 +1,5 @@
 {
-    "name": "webklex/laravel-imap",
+    "name": "kqtec/laravel-imap",
     "type": "library",
     "description": "Laravel IMAP client",
     "keywords": [
@@ -9,12 +9,12 @@
         "laravel-imap",
         "mail"
     ],
-    "homepage": "https://github.com/webklex/laravel-imap",
+    "homepage": "https://github.com/kqtec/laravel-imap",
     "license": "MIT",
     "authors": [
         {
-            "name": "Malte Goldenbaum",
-            "email": "github@webklex.com",
+            "name": "kqtec",
+            "email": "zhch92@qq.com",
             "role": "Developer"
         }
     ],

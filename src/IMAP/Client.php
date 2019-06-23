@@ -365,7 +365,13 @@ class Client {
                 if ($hierarchical && $folder->hasChildren()) {
                     $pattern = $folder->full_name.$folder->delimiter.'%';
 
-                    $children = $this->getFolders(true, $pattern);
+                    try {
+                        $children = $this->getFolders(true, $pattern);
+                    } catch (ConnectionFailedException $e) {
+                        continue;
+                    } catch (MailboxFetchingException $e) {
+                        continue;
+                    }
                     $folder->setChildren($children);
                 }
 
@@ -415,7 +421,7 @@ class Client {
 
         return $status;
     }
-    
+
     /**
      * Rename Folder
      * @param string  $old_name
@@ -432,7 +438,7 @@ class Client {
 
         return $status;
     }
-    
+
      /**
      * Delete Folder
      * @param string $name

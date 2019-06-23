@@ -168,20 +168,23 @@ class Query {
                 $query =& $this;
 
                 $available_messages->forPage($this->page, $this->limit)->each(function($msgno, $msglist) use(&$messages, $options, $query) {
-                    $oMessage = new Message($msgno, $msglist, $query->getClient(), $query->getFetchOptions(), $query->getFetchBody(), $query->getFetchAttachment(), $query->getFetchFlags());
-                    switch ($options['message_key']){
-                        case 'number':
-                            $message_key = $oMessage->getMessageNo();
-                            break;
-                        case 'list':
-                            $message_key = $msglist;
-                            break;
-                        default:
-                            $message_key = $oMessage->getMessageId();
-                            break;
+                    try {
+                        $oMessage = new Message($msgno, $msglist, $query->getClient(), $query->getFetchOptions(), $query->getFetchBody(), $query->getFetchAttachment(), $query->getFetchFlags());
+                        switch ($options['message_key']) {
+                            case 'number':
+                                $message_key = $oMessage->getMessageNo();
+                                break;
+                            case 'list':
+                                $message_key = $msglist;
+                                break;
+                            default:
+                                $message_key = $oMessage->getMessageId();
+                                break;
 
+                        }
+                        $messages->put($message_key, $oMessage);
+                    } catch (\Exception $e) {
                     }
-                    $messages->put($message_key, $oMessage);
                 });
             }
 
